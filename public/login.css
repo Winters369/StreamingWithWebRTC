@@ -1,0 +1,53 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-image: url(123.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right;
+    background-size: cover;
+    color:#0c19d6
+    
+}
+
+nav a {
+    color: inherit; /* 移除超連結顏色 */
+    text-decoration: none;  /* 移除超連結底線 */
+    display: block; /* 讓 <a> 填滿 <li> */
+    font-size: 2.0rem;
+    padding: 10px;
+    font-weight: 900;
+}
+
+nav > ul {
+    /*background-color: rgb(230, 230, 230);*/
+    list-style: none;   /* 移除項目符號 */
+    margin: 0;
+    padding: 0;
+}
+
+nav a:hover {
+    background-color: rgb(115, 115, 115);
+    color: white;
+}
+
+.flex-nav {
+    display: flex;
+    justify-content: center;
+}
+
+/*.float-nav > li {
+    float: left;
+    position: relative;
+    right: 50%; /* left: -50% 也有同樣效果 
+}*/
+
+.float-nav-outer {
+    background-color: rgba(47, 131, 228, 0.26);
+    overflow: hidden;
+}
+
+
+
