@@ -150,7 +150,14 @@ const playStop = () => {
 }
 
 const playStopMusic = () => {
-
+  let enabled = myVideoStream.getMusicTracks()[0].enabled;
+  if (enabled) {
+    myVideoStream.getMusicTracks()[0].enabled = false;
+    setPlayMusic()
+  } else {
+    setStopMusic()
+    myVideoStream.getMusicTracks()[0].enabled = true;
+  }
 }
 
 const chat_window = () => {
@@ -160,7 +167,7 @@ const chat_window = () => {
 const leave_room = () => {
   
 }
-
+/*---------------------------------------麥克風*/
 const setMuteButton = () => {
   const html = `
     <i class="fas fa-microphone"></i>
@@ -176,7 +183,7 @@ const setUnmuteButton = () => {
   `
   document.querySelector('.main__mute_button').innerHTML = html;
 }
-
+/*-------------------------------------實況*/
 const setStopVideo = () => {
   const html = `
     <i class="fas fa-video"></i>
@@ -192,7 +199,30 @@ const setPlayVideo = () => {
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
+/*------------------------------------音樂*/
+const setStopMusic = () => {
+  const html = `
+    <i class="fas fa-music"></i>
+    <span>Stop Music</span>
+  `
+  document.querySelector('.main__music_button').innerHTML = html;
+}
 
+const setPlayMusic = () => {
+  const html = `
+  <i class="stop fas fa-music-slash"></i>
+    <span>Play Music</span>
+  `
+  document.querySelector('.main__music_button').innerHTML = html;
+}
+/*-----------------------------------------------------------------------*/
+function Control(x){
+  if(x=='start'){
+  　document.getElementById("MovieShow").play();
+  }else if(x=='stop'){
+  　document.getElementById("MovieShow").pause();
+  }}
+/*下面沒有被使用--------------------------------------------------------------------*/
 const setChatRoomOpen = () => {
   const html = `
     <i class="fas fa-video"></i>
@@ -208,3 +238,5 @@ const setChatRoomClose = () => {
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
+
+

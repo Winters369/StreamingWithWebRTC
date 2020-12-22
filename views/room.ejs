@@ -20,9 +20,20 @@
   <div class='main'>
     <div class="main__left">
       <div class="main__videos">
-        <div id="video-grid"></div>
-        <div id="lyric-bar"></div>
+
+          <!--<input type="button" value="開始播放" onclick="Control('start');">
+          <input type="button" value="暫停播放" onclick="Control('stop');">-->
+
+         <div id="video-grid"></div>
+
+          
+          <div id="Movie" hidden autoplay><video id="MovieShow" controls>
+            <source src="movie/house.mp4" type="video/ogg">
+            </video></div><br>
+
+        <div id="lyric-bar"></div> <!--歌詞尚未-->
       </div>
+
       <div class="main__controls">
         <div class="main__controls__block">
           <div onclick="muteUnmute()" class="main__controls__button main__mute_button">
@@ -33,10 +44,25 @@
              <i class="fas fa-video"></i>
              <span>Stop Video</span>
           </div>
-          <div onclick="playStopMusic()" class="main__controls__button main__video_button" >
+
+          <div onclick="Control('start');" class="main__controls__button main__muisc_button" >
             <i class="fas fa-music"></i>
             <span>Music</span>
-         </div>
+          </div>
+
+          <div onclick="Control('stop');" class="main__controls__button main__muisc_button" >
+            <i class="fas fa-music"></i>
+            <span>Stop Music</span>
+          </div>
+
+
+
+
+        <!-- <div onclick="playStopMusic(x)" class="main__controls__button main__muisc_button" >
+          <i class="fas fa-music"></i>
+          <span>Music</span>
+         </div>-->
+
           <!--
             <div class="main__controls__button">
                <i class="fas fa-shield-alt"></i>
@@ -53,10 +79,9 @@
          </div>
                   </div>-->
             <div onclick="leave_room()" class="main__controls__button">
-
                <span class="leave_meeting">Leave</span>
             </div>
-
+<!-------------------------------------------------------------------------------------------------------------->
        </div>
       </div>
     </div>
@@ -74,7 +99,7 @@
         <button type="love" id="love-button"><i class="fas fa-heart"></i></button>
         <form id="send-container">
           <button type="submit" id="send-button"><i class="fas fa-arrow-right"></i></button>
-          <input type="text" id="chat_message" placeholder="Type message here...">
+          <input type="text" id="chat_message" placeholder="Type message here..." >
         </form>
       </div>
     </div>
