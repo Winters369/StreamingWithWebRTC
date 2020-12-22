@@ -70,7 +70,7 @@ navigator.mediaDevices.getUserMedia({
 })
 
 messageForm.addEventListener('love', ()=> {
-  socket.emit('send-love-message')
+  //socket.emit('send-love-message')
 })
 
 socket.on('love-message', userName => {
