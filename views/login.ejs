@@ -11,7 +11,7 @@
     <script type="text/javascript" src="login.js"></script>
 </head>
 
-<body style="background-image: url(../photo/123.png)"> 
+<body style="background-image: url(../photo/9ZZdGLE.gif"> 
     <!--<img src="/public/photo/000.jpg">-->
 
     <embed src="../music/00.mp3" autostart="true" loop="1" volume="100" hidden="true"></embed>
@@ -24,7 +24,7 @@
                 <li><a class="btn btn-danger btn-raised btn-lg" href="#login">創建房間</a></li>
                 <li><a class="btn btn-danger btn-raised btn-lg" href="#add">加入房間</a></li>
                 <!--<li><a href="#">欣賞音樂</a></li>-->
-                <li><a class="btn btn-danger btn-raised btn-lg" href="https://kimetsu.com/anime/">支持vtuber</a></li>
+                <!--<li><a class="btn btn-danger btn-raised btn-lg" href="https://kimetsu.com/anime/"></a></li>-->
                <!-- <li><a class="btn btn-danger btn-raised btn-lg" href="#">隔壁Gawr Gura間</a></li>-->
                 <!--<li><a href="#">通訊工程與軟體</a></li>-->
             </ul>
@@ -33,37 +33,37 @@
     </header>
     
     <div id="create">
-        <p id="image_logo" style="padding:5%"><a style="font-size:80px;text-align:center;background-color:initial;
-            border:10px initial solid;" cellpadding="10" border='1'><font color= #0066CC face="標楷體">創建房間</font></a></p>
+        <p id="image_logo" style="padding:3%"><a style="font-size:80px;text-align:center;background-color:initial;
+            border:4px initial solid;" cellpadding="10" border='1'><font color= #0066CC face="標楷體">創建房間</font></a></p>
 
         <form method="post" action="login.js">
             <p>
-                <label class="label_input"><font color= #0066CC face="標楷體">
+                <label class="label_input"><font color= #0066CC face="標楷體" style="font-size: xx-large;">
                     房間名稱：
                 </font></label>
-                    <input type="text" id="roomnumber" class="text_field" />
+                    <input type="text" id="roomnumber" class="text_field"  style="padding: 10px 30px;font-size: 150%;"/>
             </p>
             <div id="login_control">
-                <input type="button" id="btn_login" value="創建" onclick="location.href = 'https://capstone-streaming.herokuapp.com/'+document.getElementById('roomname').value" />
-                <input type="button" id="btn_login " value="隨機創建" onclick="'https://capstone-streaming.herokuapp.com/'" />
+                <input type="button" id="btn_login" value="創建" style="font-size : 150%" onclick="location.href = 'https://capstone-streaming.herokuapp.com/'+document.getElementById('roomname').value" />
+                <input type="button" id="btn_login" value="隨機創建" style="font-size : 150%" onclick="'https://capstone-streaming.herokuapp.com/'" />
             </div>
         </form>
      </div>
 
 
     <div id="add">
-        <p id="image_logo" style="padding:5%"><a style="font-size:80px;text-align:center;background-color:initial;
+        <p id="image_logo" style="padding:3%"><a style="font-size:80px;text-align:center;background-color:initial;
             border:10px initial solid;" cellpadding="10" border='1'><font color= #0066CC face="標楷體">加入房間</font></a></p>
 
         <form method="post" action="login.js">
             <p>
-                <label class="label_input "><font color= #0066CC face="標楷體">
+                <label class="label_input"><font color= #0066CC face="標楷體" style="font-size: xx-large;">
                     房間名稱：
                 </font></label>
-                    <input type="text" id="roomnumber" class="text_field" />
+                    <input type="text" id="roomnumber" class="text_field" style="padding: 10px 30px;font-size: 150%;"/>
             </p>
-            <div id="login_control">
-                <input type="button" id="btn_login" value="加入" onclick="location.href='https://capstone-streaming.herokuapp.com/'+document.getElementById('roomnumber').value" />
+            <div id="login_control" style="padding-bottom: 20px">
+                <input type="button" id="btn_login" style="font-size : 150%" value="加入" onclick="location.href='https://capstone-streaming.herokuapp.com/'+document.getElementById('roomnumber').value" />
             </div>
         </form>
     </div>
