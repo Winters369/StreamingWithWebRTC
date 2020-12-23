@@ -137,7 +137,10 @@ const muteUnmute = () => {
   }
 }
 
+
+
 const playStop = () => {
+  const video = document.getElementById('video')
   //console.log('object')
   let enabled = myVideoStream.getVideoTracks()[0].enabled;
   if (enabled) {
@@ -148,6 +151,15 @@ const playStop = () => {
     myVideoStream.getVideoTracks()[0].enabled = true;
   }
 }
+
+function Control(x){
+  if(x=='start'){
+  　document.getElementById("MovieShow").play();
+    document.getElementById("MovieShow").style.display="none";
+  }else if(x=='stop'){
+  　document.getElementById("MovieShow").pause();
+    document.getElementById("MovieShow").style.display="";
+  }}
 
 const playStopMusic = () => {
   let enabled = myVideoStream.getMusicTracks()[0].enabled;
@@ -216,12 +228,7 @@ const setPlayMusic = () => {
   document.querySelector('.main__music_button').innerHTML = html;
 }
 /*-----------------------------------------------------------------------*/
-function Control(x){
-  if(x=='start'){
-  　document.getElementById("MovieShow").play();
-  }else if(x=='stop'){
-  　document.getElementById("MovieShow").pause();
-  }}
+
 /*下面沒有被使用--------------------------------------------------------------------*/
 const setChatRoomOpen = () => {
   const html = `
@@ -238,5 +245,6 @@ const setChatRoomClose = () => {
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
+
 
 
