@@ -35,9 +35,10 @@ io.on('connection', socket => {
       //send message to the same room
       //io.to(roomId).emit('createMessage', message)
       socket.broadcast.emit('chat-message', {message: message, userName: users[socket.id]} )
-    }); 
-
+    });
+    //bug, cannot find it
     socket.on('send-love-message', () => {
+      console.log("love-message")
       socket.broadcast.emit('love-message', users[socket.id] )
     }); 
 

@@ -73,7 +73,9 @@ messageForm.addEventListener('love', ()=> {
   //socket.emit('send-love-message')
 })
 
+//bug: cannot find it
 socket.on('love-message', userName => {
+  console.log("cilent: love-message")
   appendMessage(`${userName}  gave host a huge ❤!!!`)
 })
 
