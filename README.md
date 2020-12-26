@@ -10,4 +10,6 @@
 ### in terminal:
  `npm i`
  `npm run devStart`
- 2. 
+ 
+### in broswer
+http://localhost:3000/
