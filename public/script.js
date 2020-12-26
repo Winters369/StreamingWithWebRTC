@@ -117,14 +117,15 @@ function appendMessage(message) {
   messageElement.innerText = message
   //put messages on the view
   messageContainer.append(messageElement)
+  //scroll to bottom
+  scrollToBottom()
 }
 
-/* old chat room
-const scrollToBottom = () => {
-  var d = $('.main__chat_window');
-  d.scrollTop(d.prop("scrollHeight"));
+function scrollToBottom(){
+  var d = $('.main__chat_window')
+  d.scrollTop(d.prop("scrollHeight"))
 }
-*/
+
 function send_love(){
   socket.emit('send-love-message')
   appendMessage("You gave host a huge ❤!!!")
