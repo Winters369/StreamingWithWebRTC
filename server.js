@@ -38,7 +38,7 @@ io.on('connection', socket => {
     });
     //bug, cannot find it
     socket.on('send-love-message', () => {
-      console.log("love-message")
+      console.log("server: love-message")
       socket.broadcast.emit('love-message', users[socket.id] )
     }); 
 

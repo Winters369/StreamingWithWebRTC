@@ -67,13 +67,13 @@ navigator.mediaDevices.getUserMedia({
     }
   })
   socket.on('chat-message', data => {
-    //console.log(data);//send hello world form server
+    console.log("hello");//send hello world form server
     appendMessage(`${data.userName}: ${data.message}`)
   })
 })
 
-messageForm.addEventListener('love', ()=> {
-  //socket.emit('send-love-message')
+messageForm.addEventListener('love', e=> {
+  socket.emit('send-love-message')
 })
 
 //bug: cannot find it

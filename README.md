@@ -1,7 +1,8 @@
 # StreamingWithWebRTC
  
  ## what we still need to do
- 1. leave room
+ 1. leave room and close site
+ 2. auto re
 ## how to open this project in your env. first time
  ### github: 
 1. choose your branch
