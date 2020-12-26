@@ -10,6 +10,7 @@ const peerServer = ExpressPeerServer(server, {
 });
 
 const users = {};
+const hosts = {};
 
 app.use('/peerjs', peerServer);
 
@@ -31,15 +32,16 @@ io.on('connection', socket => {
     socket.to(roomId).broadcast.emit('user-connected', userId, userName);
 
     // messages
-    socket.on('send-chat-message', (message) => {
+    socket.on('send-chat-message', (roomId, message) => {
       //send message to the same room
       //io.to(roomId).emit('createMessage', message)
-      socket.broadcast.emit('chat-message', {message: message, userName: users[socket.id]} )
+      //socket.broadcast.emit('chat-message', {message: message, userName: users[socket.id]} )
+      //console.log(message)
+      socket.to(roomId).broadcast.emit('chat-message', message, users[socket.id])
     });
-    //bug, cannot find it
-    socket.on('send-love-message', () => {
-      //console.log("server: love-message")
-      socket.broadcast.emit('love-message', users[socket.id] )
+  
+    socket.on('send-love-message', (roomId) => {
+      socket.to(roomId).broadcast.emit('love-message', users[socket.id] )
     }); 
 
     socket.on('disconnect', () => {

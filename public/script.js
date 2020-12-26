@@ -61,14 +61,16 @@ navigator.mediaDevices.getUserMedia({
       //show my message
       appendMessage(`You: ${message}`)
       //send information from cilent to server
-      socket.emit('send-chat-message', message)
+      //console.log(message)
+      socket.emit('send-chat-message', ROOM_ID, message)
       //clear massge value after sending
       messageInput.value = ''
     }
   })
-  socket.on('chat-message', data => {
+  socket.on('chat-message', (message, userName) => {
     //console.log("hello");//send hello world form server to other cilents
-    appendMessage(`${data.userName}: ${data.message}`)
+    //appendMessage(`${data.userName}: ${data.message}`)
+    appendMessage(`${userName}: ${message}`)
   })
 })
 
@@ -127,7 +129,7 @@ function scrollToBottom(){
 }
 
 function send_love(){
-  socket.emit('send-love-message')
+  socket.emit('send-love-message', ROOM_ID)
   appendMessage("You gave host a huge ❤!!!")
 }
 
