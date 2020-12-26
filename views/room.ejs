@@ -95,7 +95,10 @@
          </ul>
       </div>
       <div class="main__message_container">
-        <button type="love" id="love-button"><i class="fas fa-heart"></i></button>
+        <div onclick="send_love()" class="main__send_thing__button">
+          <i class="fas fa-heart"></i>
+        </div>
+
         <form id="send-container">
           <button type="submit" id="send-button"><i class="fas fa-arrow-right"></i></button>
           <input type="text" id="chat_message" placeholder="Type message here..." >

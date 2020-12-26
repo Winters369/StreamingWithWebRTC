@@ -134,13 +134,24 @@ video {
 .unmute, .stop {
     color: #CC3B33;
 }
+
+.main__send_thing__button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*padding: 8px 10px;*/
+    padding: auto;
+    min-width: 30px;
+    cursor: pointer;
+}
+
 .Movie{
     border :3px solid #686767;
     height: 22.5%;
     width: 40%;
     backface-visibility: hidden;
 } 
-
 
 .container {
     width: 100%;

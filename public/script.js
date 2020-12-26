@@ -56,7 +56,7 @@ navigator.mediaDevices.getUserMedia({
   messageForm.addEventListener('submit', e => {
     //don't refresh page when we send message, or we lose the messages
     e.preventDefault()
-      const message = messageInput.value
+    const message = messageInput.value
     if(message !== ""){
       //show my message
       appendMessage(`You: ${message}`)
@@ -67,18 +67,14 @@ navigator.mediaDevices.getUserMedia({
     }
   })
   socket.on('chat-message', data => {
-    console.log("hello");//send hello world form server
+    //console.log("hello");//send hello world form server to other cilents
     appendMessage(`${data.userName}: ${data.message}`)
   })
 })
 
-messageForm.addEventListener('love', e=> {
-  socket.emit('send-love-message')
-})
-
 //bug: cannot find it
 socket.on('love-message', userName => {
-  console.log("cilent: love-message")
+  //console.log("cilent: love-message")
   appendMessage(`${userName}  gave host a huge ❤!!!`)
 })
 
@@ -129,7 +125,10 @@ const scrollToBottom = () => {
   d.scrollTop(d.prop("scrollHeight"));
 }
 */
-
+function send_love(){
+  socket.emit('send-love-message')
+  appendMessage("You gave host a huge ❤!!!")
+}
 
 const muteUnmute = () => {
   const enabled = myVideoStream.getAudioTracks()[0].enabled;
