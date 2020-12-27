@@ -183,7 +183,10 @@ const chat_window = () => {
 }
 
 const leave_room = () => {
-  
+  console.log("LEAVE ROOM")
+  if (confirm("leave room?")){
+    window.location.assign("../")
+  }
 }
 /*---------------------------------------麥克風*/
 const setMuteButton = () => {
