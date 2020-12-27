@@ -137,7 +137,10 @@ const muteUnmute = () => {
   }
 }
 
+
+
 const playStop = () => {
+  const video = document.getElementById('video')
   //console.log('object')
   let enabled = myVideoStream.getVideoTracks()[0].enabled;
   if (enabled) {
@@ -148,9 +151,25 @@ const playStop = () => {
     myVideoStream.getVideoTracks()[0].enabled = true;
   }
 }
-
+/*------------------------------------播音樂*/
+function Control(x){
+  if(x=='start'){
+  　document.getElementById("MovieShow").play();
+    document.getElementById("MovieShow").style.display="none";
+  }else if(x=='stop'){
+  　document.getElementById("MovieShow").pause();
+    document.getElementById("MovieShow").style.display="";
+  }}
+/*-----------------------------------------------*/
 const playStopMusic = () => {
-
+  let enabled = myVideoStream.getMusicTracks()[0].enabled;
+  if (enabled) {
+    myVideoStream.getMusicTracks()[0].enabled = false;
+    setPlayMusic()
+  } else {
+    setStopMusic()
+    myVideoStream.getMusicTracks()[0].enabled = true;
+  }
 }
 
 const chat_window = () => {
@@ -160,7 +179,7 @@ const chat_window = () => {
 const leave_room = () => {
   
 }
-
+/*---------------------------------------麥克風*/
 const setMuteButton = () => {
   const html = `
     <i class="fas fa-microphone"></i>
@@ -176,7 +195,7 @@ const setUnmuteButton = () => {
   `
   document.querySelector('.main__mute_button').innerHTML = html;
 }
-
+/*-------------------------------------實況*/
 const setStopVideo = () => {
   const html = `
     <i class="fas fa-video"></i>
@@ -192,7 +211,25 @@ const setPlayVideo = () => {
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
+/*------------------------------------音樂*/
+const setStopMusic = () => {
+  const html = `
+    <i class="fas fa-music"></i>
+    <span>Stop Music</span>
+  `
+  document.querySelector('.main__music_button').innerHTML = html;
+}
 
+const setPlayMusic = () => {
+  const html = `
+  <i class="stop fas fa-music-slash"></i>
+    <span>Play Music</span>
+  `
+  document.querySelector('.main__music_button').innerHTML = html;
+}
+/*-----------------------------------------------------------------------*/
+
+/*下面沒有被使用--------------------------------------------------------------------*/
 const setChatRoomOpen = () => {
   const html = `
     <i class="fas fa-video"></i>
@@ -208,3 +245,125 @@ const setChatRoomClose = () => {
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
+
+/*-------------------------------------------------------濾鏡*/
+
+  function fileSelect() { 
+    let img = document.getElementById('video-grid')
+    document.getElementById('file').onchange = function() { 
+      var reader = new FileReader();
+      reader.onload = function(e) { 
+        img.src = e.target.result; 
+      } 
+      reader.readAsDataURL(this.files[0]); 
+    } 
+  }
+  function reset() { 
+    let reset_btn = document.getElementById('reset'); 
+    let val_boxes = document.getElementsByClassName('val-box'); 
+    let val_arr = Array.prototype.slice.call(val_boxes); 
+    let img = document.getElementById('video-grid') 
+    reset_btn.addEventListener('click', function() { 
+      //所有的数据输入重置为空 
+      val_arr.forEach(function(item) { 
+        item.value = "";
+      }); //去掉图片的css属性 
+      img.style.filter = ""; 
+    }) 
+  }
+  function filter(type) { 
+    //获取滤镜类型关联的dom节点 //绑定change事件 //更改右侧输入框的显示的值，以及更新滤镜效果 
+    let ele = document.getElementById(type); 
+    let ele_val = document.getElementById(type + '-val'); 
+    ele_val.addEventListener('keyup',function(e){ 
+      if(e.key == 13){
+         ele.value = ele_val.value; 
+         setCss(type, ele_val.value); 
+        } 
+      }) 
+      ele.addEventListener('change', function() { 
+        ele_val.value = ele.value; 
+        setCss(type, ele_val.value);
+     });
+  }
+
+  function setCss(type, val) { 
+    let img = document.getElementById('video-grid') 
+    //已经存在某个滤镜,更改滤镜数值 
+    if (img.style.filter.indexOf(type) > -1) { 
+      let reg = new RegExp("(?<=" + type + ")" + "\\(.*\\)", "g")
+       img.style.filter = img.style.filter.replace(reg, function(match) { return `(${val/100})` }); 
+      } else { 
+        //直接添加新滤镜 
+        img.style.filter += `${type}(${val/100})` 
+      } 
+  } 
+  window.onload = function() { 
+    //亮度
+     filter('brightness'); 
+     //对比度 
+     filter('contrast'); 
+     //灰度 
+     filter('grayscale'); 
+     //饱和度 
+     filter('saturate'); 
+     //透明度
+      filter('opacity'); 
+      //反相 
+      filter('invert'); 
+      //注册重置 
+      reset(); 
+      //注册文件选择 
+      fileSelect(); 
+    }
+
+/*
+    function preview(file){
+      const img = document.getElementById('video-grid') 
+      if(file.files && file.files[0]){
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+              img.src = evt.target.result;
+          };
+          reader.readAsDataURL(file.files[0]);
+      }
+      console.log(file.files , file.files[0]);
+  }
+
+  function changeImg(){
+    const img = document.getElementById('video-grid') 
+    let grayscale = document.getElementById("grayscale").value,
+        brightness = document.getElementById("brightness").value,
+        contrast = document.getElementById("contrast").value,
+        saturate = document.getElementById("saturate").value;
+    img.style.webkitFilter = "grayscale("+grayscale+"%) brightness("+brightness+"%) contrast("+contrast+"%) saturate("+saturate+"%)";
+    img.style.filter = "grayscale("+grayscale+"%) brightness("+brightness+"%) contrast("+contrast+"%) saturate("+saturate+"%)";
+}
+//    数值调整
+function changeValue(type){
+    let valBlock,val;
+    if(type === 1){
+        valBlock =  document.getElementById("grayscaleText");
+        val = document.getElementById("grayscale").value;
+    }else if(type === 2){
+        valBlock =  document.getElementById("brightnessText");
+        val = document.getElementById("brightness").value;
+    }else if(type === 3){
+        valBlock =  document.getElementById("contrastText");
+        val = document.getElementById("contrast").value;
+    }else if(type === 4){
+        valBlock =  document.getElementById("saturateText");
+        val = document.getElementById("saturate").value;
+    }
+    valBlock.innerHTML = val + '%';
+    changeImg();
+}
+*/
+/*function Size(x){
+  if(x=='big'){
+    　document.getElementById('video-grid').width=500;
+    　document.getElementById('video-grid').height=450;
+  }else if(x=='small'){
+    　document.getElementById('video-grid').width=260;
+    　document.getElementById('video-grid').height=234;
+  }}*/

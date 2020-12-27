@@ -1,19 +1,32 @@
 .body{
-    float: left;
-    margin: 0;
-    padding: 0;
+    margin: 0%;
+    padding: 0%;
+   /* width: auto;*/
+   /* height: auto;*/
     font: normal 100% Helvetica, Arial, sans-serif;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right;
+    background-size: cover;
+}
+
+input, textarea {
+    font-size: initial;
 }
 
 .main {
     height: 100vh;
     /*display: flex;*/
-
+    background-size: cover;
 }
+
 .main__left {
     flex: 0.6;
     display: flex;
     flex-direction: column;
+    /*float: left;*/
+    flex-wrap: wrap;
+    overflow: auto;
 }
 .main__right {
     flex: 0.4;
@@ -21,6 +34,7 @@
     border-left: 1px solid #000000;
     display: flex;
     flex-direction: column;
+    object-fit: cover;
 }
 
 .main__videos {
@@ -29,12 +43,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px;
+    padding: 40pt;
+
+    /*濾鏡-webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+   /* filter: grayscale(50%);*/
+   
 }
 #video-grid {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    -webkit-filter: grayscale(0%) brightness(100%) contrast(100%) saturate(100%);
+        filter: grayscale(0%) brightness(100%) contrast(100%) saturate(100%);
 }
 video {
     border :3px solid #686767;
@@ -42,13 +62,22 @@ video {
     width: 40%;
     max-height: 500;
     object-fit: cover;
+    /*filter:sepia(2);*/
+    /*filter:hue-rotate(90deg);
+   /* clip-path: polygon(25% 0, 0 100%, 100% 51%);切割*/
+    /* animation: pulse 5s linear infinite;*/
+    cursor: wait;
 }
+
+                /*@keyframes pulse {
+                    from { filter: hue-rotate(0); }
+                    to { filter: hue-rotate(360deg); }
+                }  RGB特效*/
 
 .main__header {
     padding-top: 5px;
     color: #ffffff;
     text-align: center;
-   /* margin-bottom: 75%;*/
 }
 .main__chat_window { 
     flex-grow: 1;
@@ -61,29 +90,29 @@ video {
 }
 .messages{
     color: rgb(255, 255, 255);
-    padding:auto;
+    padding-right: 11%;
     list-style: none;
 }
 .main__message_container {
    /* padding: 22px 12px;*/
-     padding:auto;
     display: flex;
-    
+    padding: 0.1% 0.1%;
+    overflow: auto;
 }
 .main__message_container input {
     flex-grow: 1;
     background-color: transparent;
     border: none;
     color: #ffffff;
+    font-family:serif;
 }
 
 .main__controls {
     background-color: #1C1E20;
-
     color: #ffffff;
     display: flex;
     justify-content: space-between;
-    padding: 5px;
+    padding: 1%;
 }
 .main__controls__block {
     display: flex;
@@ -111,3 +140,13 @@ video {
 .unmute, .stop {
     color: #CC3B33;
 }
+.Movie{
+    border :3px solid #686767;
+    height: 22.5%;
+    width: 40%;
+    backface-visibility: hidden;
+} 
+
+
+
+

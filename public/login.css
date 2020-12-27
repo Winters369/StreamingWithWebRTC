@@ -1,0 +1,152 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-image: url(123.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right;
+    background-size: cover;
+    color:#0c19d6;
+    
+}
+
+nav a {
+    color: inherit; /* 移除超連結顏色 */
+    text-decoration: none;  /* 移除超連結底線 */
+    display: block; /* 讓 <a> 填滿 <li> */
+    font-size: 2.0rem;
+    padding: 10px;
+    font-weight: 900;
+}
+
+nav > ul {
+    /*background-color: rgb(230, 230, 230);*/
+    list-style: none;   /* 移除項目符號 */
+    margin: 0;
+    padding: 0;
+}
+
+nav a:hover {
+    background-color: rgb(115, 115, 115);
+    color: white;
+}
+
+.flex-nav {
+    display: flex;
+    justify-content: center;
+}
+
+/*.float-nav > li {
+    float: left;
+    position: relative;
+    right: 50%; /* left: -50% 也有同樣效果 
+}*/
+
+.float-nav-outer {
+    background-color: rgba(47, 131, 228, 0.26);
+    overflow: hidden;
+}
+
+/*-----------------------------特效*/
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 2em;
+    filter: contrast(20);
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.an {
+    font-family: Righteous;
+    background-color: rgba(20, 134, 187, 0.116);
+    font-size: 200%;
+    text-transform: uppercase;
+    line-height: 1;
+    animation: letterspacing 2s infinite alternate ease-out;
+    display: block;
+    position: absolute;
+    left: 45%;
+    top: 10%;
+    transform: translate3d(-50%, -50%, 0);
+    letter-spacing: -1.2rem;
+}
+
+@keyframes letterspacing {
+    0% {
+        letter-spacing: -1.2rem;
+        filter: blur(.4rem);
+        color: rgba(84, 50, 196, 0);
+    }
+
+    50% {
+        filter: blur(.5rem);
+        color: rgba(79, 24, 207, 0.342);
+    }
+
+    100% {
+        letter-spacing: .5rem;
+        filter: blur(0rem);
+        color: rgba(17, 72, 223, 0.925);
+    }
+}
+
+/*-------------------------------按鈕特效*/
+.bb {
+   /* position: absolute;
+    top: 50%;
+    left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+    width: 20%;
+    height: auto;
+    line-height: 60px;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: sans-serif;
+    box-sizing: border-box;
+    background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+    background-size: 400%;
+    border-radius: 60px;
+    z-index: 1;
+  }
+  
+  .bb:hover {
+    animation: animate 8s linear infinite;
+  }
+  
+  @keyframes animate {
+    0% {
+      background-position: 0%;
+    }
+    100% {
+      background-position: 400%;
+    }
+  }
+  
+  .bb::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+    background-size: 400%;
+    border-radius: 40px;
+    opacity: 0;
+    transition: 0.5s;
+  }
+  
+  .bb:hover::before {
+    filter: blur(20px);
+    opacity: 1;
+    animation: animate 8s linear infinite;
+  }
+
