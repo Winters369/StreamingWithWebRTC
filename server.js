@@ -29,24 +29,24 @@ app.get('/:room', (req, res) => {
 io.on('connection', socket => {
   socket.on('join-room', (roomId, userId, userName) => {
     socket.join(roomId)
-    users[roomId][socket.id] = userName
+    users[socket.id] = userName
     socket.to(roomId).broadcast.emit('user-connected', userId, userName);
 
     // messages
-    socket.on('send-chat-message', (message) => {
+    socket.on('send-chat-message', (roomId, message) => {
       //send message to the same room
       //io.to(roomId).emit('createMessage', message)
       //socket.broadcast.emit('chat-message', {message: message, userName: users[socket.id]} )
       //console.log(message)
-      socket.to(roomId).broadcast.emit('chat-message', message, users[roomId][socket.id])
+      socket.to(roomId).broadcast.emit('chat-message', message, users[socket.id])
     });
   
-    socket.on('send-love-message', () => {
-      socket.to(roomId).broadcast.emit('love-message', users[roomId][socket.id] )
+    socket.on('send-love-message', (roomId) => {
+      socket.to(roomId).broadcast.emit('love-message', users[socket.id] )
     }); 
 
     socket.on('disconnect', () => {
-      socket.to(roomId).broadcast.emit('user-disconnected', userId, users[roomId][socket.id])
+      socket.to(roomId).broadcast.emit('user-disconnected', userId, users[socket.id])
       delete users[socket.id]
     })
   })

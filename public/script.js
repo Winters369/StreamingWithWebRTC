@@ -16,7 +16,6 @@ let myVideoStream;
 const myVideo = document.createElement('video')
 myVideo.muted = true;
 const peers = {}
-
 navigator.mediaDevices.getUserMedia({
   video:  {//limit video in HD
     width: {exact:1280},
@@ -39,7 +38,7 @@ navigator.mediaDevices.getUserMedia({
     appendMessage(`${userName} joined room!`)
     connectToNewUser(userId, stream)
   })
-  /* old chat room
+  /*
   // input value
   let text = $("input");
   // when press enter send message
@@ -54,30 +53,27 @@ navigator.mediaDevices.getUserMedia({
     scrollToBottom()
   })
   */
+  messageForm.addEventListener('submit', e => {
+    //don't refresh page when we send message, or we lose the messages
+    e.preventDefault()
+    const message = messageInput.value
+    if(message !== ""){
+      //show my message
+      appendMessage(`You: ${message}`)
+      //send information from cilent to server
+      //console.log(message)
+      socket.emit('send-chat-message', ROOM_ID, message)
+      //clear massge value after sending
+      messageInput.value = ''
+    }
+  })
+  socket.on('chat-message', (message, userName) => {
+    //console.log("hello");//send hello world form server to other cilents
+    //appendMessage(`${data.userName}: ${data.message}`)
+    appendMessage(`${userName}: ${message}`)
+  })
 })
 
-//chat room
-messageForm.addEventListener('submit', e => {
-  //don't refresh page when we send message, or we lose the messages
-  e.preventDefault()
-  const message = messageInput.value
-  if(message !== ""){
-    //show my message
-    appendMessage(`You: ${message}`)
-    //send information from cilent to server
-    //console.log(message)
-    socket.emit('send-chat-message', message)
-    //clear massge value after sending
-    messageInput.value = ''
-  }
-})
-socket.on('chat-message', (message, userName) => {
-  //console.log("hello");//send hello world form server to other cilents
-  //appendMessage(`${data.userName}: ${data.message}`)
-  appendMessage(`${userName}: ${message}`)
-})
-
-//give some thing
 socket.on('love-message', userName => {
   //console.log("cilent: love-message")
   appendMessage(`${userName}  gave host a huge ❤!!!`)
@@ -90,11 +86,6 @@ socket.on('user-disconnected', (userId, userName) => {
 
 myPeer.on('open', id => {
   const userName = prompt('What is your name?')
-  console.log(userName)
-  if(userName=''){
-    userName = NoOne
-  }
-  console.log(userName)
   appendMessage('You joined!')
   socket.emit('join-room', ROOM_ID, id, userName)
 })
@@ -260,6 +251,3 @@ const setChatRoomClose = () => {
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
-
-
-
