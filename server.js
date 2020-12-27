@@ -11,6 +11,7 @@ const peerServer = ExpressPeerServer(server, {
 
 const users = {};
 const hosts = {};
+const room = {};
 
 app.use('/peerjs', peerServer);
 
@@ -28,24 +29,24 @@ app.get('/:room', (req, res) => {
 io.on('connection', socket => {
   socket.on('join-room', (roomId, userId, userName) => {
     socket.join(roomId)
-    users[socket.id] = userName
+    users[roomId][socket.id] = userName
     socket.to(roomId).broadcast.emit('user-connected', userId, userName);
 
     // messages
-    socket.on('send-chat-message', (roomId, message) => {
+    socket.on('send-chat-message', (message) => {
       //send message to the same room
       //io.to(roomId).emit('createMessage', message)
       //socket.broadcast.emit('chat-message', {message: message, userName: users[socket.id]} )
       //console.log(message)
-      socket.to(roomId).broadcast.emit('chat-message', message, users[socket.id])
+      socket.to(roomId).broadcast.emit('chat-message', message, users[roomId][socket.id])
     });
   
-    socket.on('send-love-message', (roomId) => {
-      socket.to(roomId).broadcast.emit('love-message', users[socket.id] )
+    socket.on('send-love-message', () => {
+      socket.to(roomId).broadcast.emit('love-message', users[roomId][socket.id] )
     }); 
 
     socket.on('disconnect', () => {
-      socket.to(roomId).broadcast.emit('user-disconnected', userId, users[socket.id])
+      socket.to(roomId).broadcast.emit('user-disconnected', userId, users[roomId][socket.id])
       delete users[socket.id]
     })
   })

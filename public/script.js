@@ -66,7 +66,7 @@ messageForm.addEventListener('submit', e => {
     appendMessage(`You: ${message}`)
     //send information from cilent to server
     //console.log(message)
-    socket.emit('send-chat-message', ROOM_ID, message)
+    socket.emit('send-chat-message', message)
     //clear massge value after sending
     messageInput.value = ''
   }
@@ -137,7 +137,7 @@ function scrollToBottom(){
 }
 
 function send_love(){
-  socket.emit('send-love-message', ROOM_ID)
+  socket.emit('send-love-message')
   appendMessage("You gave host a huge ❤!!!")
 }
 
