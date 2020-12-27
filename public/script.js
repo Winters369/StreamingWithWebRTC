@@ -12,10 +12,27 @@ const messageContainer = document.getElementById('message-container')
 const messageForm = document.getElementById('send-container')
 const messageInput = document.getElementById('chat_message')
 
+myPeer.on('open', id => {
+  const userName = prompt('What is your name?')
+  appendMessage('You joined!')
+  socket.emit('join-room', ROOM_ID, id, userName)
+  //socket.emit('veritfy-hostOguest')
+})
+/*
+socket.on('show-video',(num_room_guests) => {
+  console.log(num_room_guests)
+  if(num_room_guests===1){
+    appendMessage("You are the room host!")
+  }else{
+    appendMessage("Welcome!")
+  }
+})*/
+
 let myVideoStream;
 const myVideo = document.createElement('video')
 myVideo.muted = true;
 const peers = {}
+
 navigator.mediaDevices.getUserMedia({
   video:  {//limit video in HD
     width: {exact:1280},
@@ -25,6 +42,8 @@ navigator.mediaDevices.getUserMedia({
 }).then(stream => {
   myVideoStream = stream;
   addVideoStream(myVideo, stream)
+  
+  //add other video while they call
   myPeer.on('call', call => {
     //console.log('answer')
     call.answer(stream)
@@ -33,50 +52,11 @@ navigator.mediaDevices.getUserMedia({
       addVideoStream(video, userVideoStream)
     })
   })
-
+  //show message and connect while new guest join
   socket.on('user-connected', (userId, userName) => {
     appendMessage(`${userName} joined room!`)
     connectToNewUser(userId, stream)
   })
-  /*
-  // input value
-  let text = $("input");
-  // when press enter send message
-  $('html').keydown(function (e) {
-    if (e.which == 13 && text.val().length !== 0) {
-      socket.emit('send-chat-message', text.val());
-      text.val('')
-    }
-  });
-  socket.on("createMessage", (message) => {
-    $("ul").append(`<li class="message"><b>User: </b>${message}</li>`);
-    scrollToBottom()
-  })
-  */
-  messageForm.addEventListener('submit', e => {
-    //don't refresh page when we send message, or we lose the messages
-    e.preventDefault()
-    const message = messageInput.value
-    if(message !== ""){
-      //show my message
-      appendMessage(`You: ${message}`)
-      //send information from cilent to server
-      //console.log(message)
-      socket.emit('send-chat-message', ROOM_ID, message)
-      //clear massge value after sending
-      messageInput.value = ''
-    }
-  })
-  socket.on('chat-message', (message, userName) => {
-    //console.log("hello");//send hello world form server to other cilents
-    //appendMessage(`${data.userName}: ${data.message}`)
-    appendMessage(`${userName}: ${message}`)
-  })
-})
-
-socket.on('love-message', userName => {
-  //console.log("cilent: love-message")
-  appendMessage(`${userName}  gave host a huge ❤!!!`)
 })
 
 socket.on('user-disconnected', (userId, userName) => {
@@ -84,10 +64,43 @@ socket.on('user-disconnected', (userId, userName) => {
   appendMessage(`${userName} leave room!`)
 })
 
-myPeer.on('open', id => {
-  const userName = prompt('What is your name?')
-  appendMessage('You joined!')
-  socket.emit('join-room', ROOM_ID, id, userName)
+//chat room
+/*
+let text = $("input");// input value
+$('html').keydown(function (e) {// when press enter send message
+  if (e.which == 13 && text.val().length !== 0) {
+    socket.emit('send-chat-message', text.val());
+    text.val('')
+  }
+});
+socket.on("createMessage", (message) => {
+  $("ul").append(`<li class="message"><b>User: </b>${message}</li>`);
+  scrollToBottom()
+})
+*/
+messageForm.addEventListener('submit', e => {
+  //don't refresh page when we send message, or we lose the messages
+  e.preventDefault()
+  const message = messageInput.value
+  if(message !== ""){
+    //show my message
+    appendMessage(`You: ${message}`)
+    //send information from cilent to server
+    //console.log(message)
+    socket.emit('send-chat-message', message)
+    //clear massge value after sending
+    messageInput.value = ''
+  }
+})
+socket.on('chat-message', (message, userName) => {
+  //console.log("hello");//send hello world form server to other cilents
+  //appendMessage(`${data.userName}: ${data.message}`)
+  appendMessage(`${userName}: ${message}`)
+})
+
+socket.on('love-message', userName => {
+  //console.log("cilent: love-message")
+  appendMessage(`${userName}  gave host a huge ❤!!!`)
 })
 
 function connectToNewUser(userId, stream) {
@@ -143,8 +156,6 @@ const muteUnmute = () => {
   }
 }
 
-
-
 const playStop = () => {
   const video = document.getElementById('video')
   //console.log('object')
@@ -183,7 +194,7 @@ const chat_window = () => {
 }
 
 const leave_room = () => {
-  console.log("LEAVE ROOM")
+  //console.log("LEAVE ROOM")
   if (confirm("leave room?")){
     window.location.assign("../")
   }

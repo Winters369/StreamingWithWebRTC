@@ -10,8 +10,7 @@ const peerServer = ExpressPeerServer(server, {
 });
 
 const users = {};
-const hosts = {};
-const room = {};
+const num_room_guests = {}
 
 app.use('/peerjs', peerServer);
 
@@ -29,25 +28,43 @@ app.get('/:room', (req, res) => {
 io.on('connection', socket => {
   socket.on('join-room', (roomId, userId, userName) => {
     socket.join(roomId)
+    //recording username with userid
     users[socket.id] = userName
-    socket.to(roomId).broadcast.emit('user-connected', userId, userName);
+    //count room guests
+    if(num_room_guests[roomId] === undefined){
+      num_room_guests[roomId] = 1
+    }else{
+      num_room_guests[roomId] = num_room_guests[roomId] + 1
+    }
 
+    socket.on('veritfy-hostOguest',()=>{
+      socket.to(roomId).broadcast.emit('show-video', num_room_guests[roomId])
+      console.log("show-video")
+    })
+    
+    //connnecting with other user's video
+    socket.to(roomId).broadcast.emit('user-connected', userId, userName);
+  
     // messages
-    socket.on('send-chat-message', (roomId, message) => {
+    socket.on('send-chat-message', (message) => {
       //send message to the same room
       //io.to(roomId).emit('createMessage', message)
       //socket.broadcast.emit('chat-message', {message: message, userName: users[socket.id]} )
-      //console.log(message)
       socket.to(roomId).broadcast.emit('chat-message', message, users[socket.id])
     });
   
-    socket.on('send-love-message', (roomId) => {
+    socket.on('send-love-message', () => {
       socket.to(roomId).broadcast.emit('love-message', users[socket.id] )
     }); 
 
     socket.on('disconnect', () => {
       socket.to(roomId).broadcast.emit('user-disconnected', userId, users[socket.id])
       delete users[socket.id]
+      if(num_room_guests[roomId] === 1){
+        delete num_room_guests[roomId]
+      }else{
+        num_room_guests[roomId] = num_room_guests[roomId] - 1
+      }
     })
   })
 })
