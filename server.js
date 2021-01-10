@@ -11,6 +11,7 @@ const peerServer = ExpressPeerServer(server, {
 
 const users = {};
 const num_room_guests = {}
+const flag_song_start = {}
 
 app.use('/peerjs', peerServer);
 
@@ -56,6 +57,20 @@ io.on('connection', socket => {
     socket.on('send-love-message', () => {
       socket.to(roomId).broadcast.emit('love-message', users[socket.id] )
     }); 
+
+    socket.on('song_signal', () => {
+      if(flag_song_start[roomId]== undefined){
+        flag_song_start[roomId] = 0
+      }
+
+      if(flag_song_start[roomId] == 0){
+        flag_song_start[roomId] = 1
+      }else{
+        flag_song_start[roomId] = 0
+      }
+      socket.to(roomId).broadcast.emit('song_message', flag_song_start[roomId] )
+    });
+    
 
     socket.on('disconnect', () => {
       socket.to(roomId).broadcast.emit('user-disconnected', userId, users[socket.id])

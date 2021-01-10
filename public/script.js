@@ -103,6 +103,24 @@ socket.on('love-message', userName => {
   appendMessage(`${userName}  gave host a huge ❤!!!`)
 })
 
+socket.on('song_message', flag_song_start => {
+  //console.log("cilent: love-message")
+  if(flag_song_start==1){
+    document.getElementById("MovieShow").play();
+    document.getElementById("MovieShow").volume = 0.3;
+    document.getElementById("MovieShow").style.display="none";
+    document.getElementById("lyric_text").style.display = "grid"
+    appendMessage("Start Sing!")
+    setHideMusic()
+  }else{
+    document.getElementById("MovieShow").pause();
+    document.getElementById("MovieShow").style.display="";
+    document.getElementById("lyric_text").style.display = "none"
+    appendMessage("Take Break!")
+    setShowMusic()
+  }
+})
+
 function connectToNewUser(userId, stream) {
   const call = myPeer.call(userId, stream)
   const video = document.createElement('video')
@@ -174,12 +192,16 @@ const playStopMusic = () => {
     document.getElementById("MovieShow").pause();
     document.getElementById("MovieShow").style.display="";
     document.getElementById("lyric_text").style.display = "none"
+    appendMessage("Take Break!")
+    socket.emit('song_signal')
     setPlayMusic()
   } else {
     document.getElementById("MovieShow").play();
     document.getElementById("MovieShow").volume = 0.3;
     document.getElementById("MovieShow").style.display="none";
     document.getElementById("lyric_text").style.display = "grid"
+    appendMessage("Start Sing!")
+    socket.emit('song_signal')
     setStopMusic()
   }
 }
@@ -252,6 +274,7 @@ const setPlayVideo = () => {
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
+
 const setShowFilter = () => {
   const html = `
     <i class="stop fas fa-filter"></i>
@@ -274,6 +297,7 @@ const setStopMusic = () => {
     <span>Pause</span>
   `
   document.querySelector('.main__music_button').innerHTML = html;
+  
 }
 
 const setPlayMusic = () => {
@@ -282,6 +306,14 @@ const setPlayMusic = () => {
     <span>Play</span>
   `
   document.querySelector('.main__music_button').innerHTML = html;
+}
+
+const setHideMusic = () => {
+  document.getElementById("music_button").style.display = "none"
+}
+
+const setShowMusic = () => {
+  document.getElementById("music_button").style.display = "grid"
 }
 
 const setChatRoomOpen = () => {
