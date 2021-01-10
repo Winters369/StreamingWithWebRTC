@@ -20,7 +20,43 @@
   <div class='main'>
     <div class="main__left">
       <div class="main__videos">
-
+        <div class="main__lyric" id="lyric_text">
+          [周]半夜睡不著覺 把心情哼成歌<br>
+          只好到屋頂找另一個夢境<br>
+          [嵐]睡夢中被敲醒 我還是不確定<br>
+          怎會有動人旋律在對面的屋頂<br>
+          我悄悄關上門 帶著希望上去<br>
+          原來是我夢裡常出現的那個人<br>
+          [周]那個人不就是我夢裡那模糊的人<br>
+          我們有同樣的默契 用天線<br>
+          [合]用天線 排成愛你的形狀 Ｈｏ～Ｈｏ～<br><br>
+          在屋頂唱著你的歌<br>
+          [周]在屋頂和我愛的人<br>
+          [嵐]讓星星點綴成<br>
+          [合]最浪漫的夜晚 擁抱這時刻<br>
+          這一分一秒全都停止<br>
+          [周]愛開始糾結<br><br>
+          在屋頂唱著你的歌<br>
+          [周]在屋頂和我愛的人<br>
+          [嵐]將泛黃的夜獻<br>
+          [合]給最孤獨的月 擁抱這時刻<br>
+          這一分一秒全都停止<br>
+          [周]愛開始糾結<br>
+          [合]夢有你而美<br><br>
+          半夜睡不著覺 把心情哼成歌<br>
+          只好到屋頂找另一個夢境<br>
+          [嵐]睡夢中被敲醒 我還是不確定<br>
+          怎會有動人旋律在對面的屋頂<br>
+          我悄悄關上門 帶著希望上去<br>
+          原來是我夢裡常出現的那個人<br>
+          [周]那個人不就是我夢裡那模糊的人<br>
+          我們有同樣的默契 用天線<br>
+          [合]用天線 排成愛你的形狀 Ｈｏ～Ｈｏ～<br><br>
+          在屋頂唱著你的歌<br>
+          [周]在屋頂和我愛的人<br>
+          [嵐]讓星星點綴成<br>
+          [合]最浪漫的夜晚 擁抱這時刻…<br>
+        </div>
           <!--<input type="button" value="開始播放" onclick="Control('start');">
           <input type="button" value="暫停播放" onclick="Control('stop');">-->
 
@@ -34,10 +70,6 @@
               <source src="movie/house.mp4" type="video/ogg">
             </video>
           </div>
-
-        <div id="lyric-bar">
-          
-        </div>
       </div>
 
       <div class="main__controls">
@@ -61,40 +93,6 @@
             <span>show</span>
           </div>
 
-          <div class="main__filter_panel" id="state_filter">
-            <div>
-              <li> 
-                <label for="brightness">亮度(0-200)：</label>
-                <input id="brightness" max="200" min="0" step="1" type="range"> 
-                <input id="brightness-val" class="val-box" type="number"> 
-              </li> 
-              <li> 
-                <label for="contrast">对比度(0-200)：</label> 
-                <input id="contrast" max="200" min="0" step="1" type="range"> 
-                <input id="contrast-val" class="val-box" type="number"> 
-              </li> 
-              <li> 
-                <label for="grayscale">灰度(0-100)：</label> 
-                <input id="grayscale" max="100" min="0" step="1" type="range"> 
-                <input id="grayscale-val" class="val-box" type="number"> 
-              </li> 
-              <li>
-                <label for="saturate">饱和度(0-200)： </label> 
-                <input id="saturate" max="200" min="0" step="1" type="range"> 
-                <input id="saturate-val" class="val-box" type="number"> </li> 
-              <li> 
-                <label for="opacity">透明度(0-100)：</label> 
-                <input id="opacity" max="100" min="0" step="1" type="range"> 
-                <input id="opacity-val" class="val-box" type="number"> 
-              </li> 
-              <li> 
-                <label for="invert">反相(0-100)：</label> 
-                <input id="invert" max="100" min="0" step="1" type="range"> 
-                <input id="invert-val" class="val-box" type="number"> 
-              </li>
-              <button id="reset">重置效果</button>
-            </div>
-          </div>
           <!--<input id="file" type="file" accept="image/*"> -->
           
          <!-- <div>
@@ -117,11 +115,6 @@
             <input type="range" min="0" max="200" value="100" id="saturate" onmousemove="changeValue(4)">
             <span id="saturateText">100%</span>
         </div>-->
-
-        <!-- <div onclick="playStopMusic(x)" class="main__controls__button main__muisc_button" >
-          <i class="fas fa-music"></i>
-          <span>Music</span>
-         </div>-->
           <!--
             <div class="main__controls__button">
                <i class="fas fa-shield-alt"></i>
@@ -131,12 +124,12 @@
                <i class="fas fa-user-friends"></i>
                <span>Participants</span>
             </div>
-            <div class="main__controls__button">
-               <i class="fas fa-comment-alt"></i>
-               <span>Chat</span>
-            </div>
          </div>
                   </div>-->
+            <div onclick="showHideChat_window()" class="main__controls__button main__chat_button">
+              <i class="fas fa-comment-alt"></i>
+              <span>Chat</span>
+            </div>
 
             <div onclick="leave_room()" class="main__controls__button">
                <span class="leave_meeting">Leave</span>
@@ -146,26 +139,61 @@
       </div>
     </div>
 
-    <div class="main__right">
-      <div class="main__header">
-        <h6>Chat room</h6>
-      </div>
-      <div class="main__chat_window">
-         <ul class="messages">
-           <div id="message-container"></div>
-         </ul>
-      </div>
-      <div class="main__message_container">
-        <div onclick="send_love()" class="main__send_thing__button">
-          <i class="fas fa-heart"></i>
+    <div class="main__right" >
+      <div class="main__filter_panel" id="state_filter">
+        <div>
+          <li> 
+            <label for="brightness">亮度(0-200)：</label>
+            <input id="brightness" max="200" min="0" step="1" type="range"> 
+            <input id="brightness-val" class="val-box" type="number"> 
+          </li> 
+          <li> 
+            <label for="contrast">对比度(0-200)：</label> 
+            <input id="contrast" max="200" min="0" step="1" type="range"> 
+            <input id="contrast-val" class="val-box" type="number"> 
+          </li> 
+          <li> 
+            <label for="grayscale">灰度(0-100)：</label> 
+            <input id="grayscale" max="100" min="0" step="1" type="range"> 
+            <input id="grayscale-val" class="val-box" type="number"> 
+          </li> 
+          <li>
+            <label for="saturate">饱和度(0-200)： </label> 
+            <input id="saturate" max="200" min="0" step="1" type="range"> 
+            <input id="saturate-val" class="val-box" type="number"> </li> 
+          <li> 
+            <label for="opacity">透明度(0-100)：</label> 
+            <input id="opacity" max="100" min="0" step="1" type="range"> 
+            <input id="opacity-val" class="val-box" type="number"> 
+          </li> 
+          <li> 
+            <label for="invert">反相(0-100)：</label> 
+            <input id="invert" max="100" min="0" step="1" type="range"> 
+            <input id="invert-val" class="val-box" type="number"> 
+          </li>
+          <button id="reset">重置效果</button>
         </div>
+      </div>
+      <div id="state_chat_window">
+        <div class="main__header">
+          <h6>Chat room</h6>
+        </div>
+        <div class="main__chat_window">
+          <ul class="messages">
+            <div id="message-container"></div>
+          </ul>
+        </div>
+        <div class="main__message_container">
+          <div onclick="send_love()" class="main__send_thing__button">
+            <i class="fas fa-heart"></i>
+          </div>
 
-        <form id="send-container">
-          <button type="submit" id="send-button"><i class="fas fa-arrow-right"></i></button>
-          <input type="text" id="chat_message" placeholder="Type message here..." >
-        </form>
+          <form id="send-container">
+            <button type="submit" id="send-button"><i class="fas fa-arrow-right"></i></button>
+            <input type="text" id="chat_message" placeholder="Type message here..." >
+          </form>
+        </div>
       </div>
     </div>
-  </div>
 </body>
 </html>

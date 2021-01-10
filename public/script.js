@@ -173,19 +173,23 @@ const playStopMusic = () => {
   if (state_music=="none") {
     document.getElementById("MovieShow").pause();
     document.getElementById("MovieShow").style.display="";
+    document.getElementById("lyric_text").style.display = "none"
     setPlayMusic()
   } else {
     document.getElementById("MovieShow").play();
     document.getElementById("MovieShow").style.display="none";
+    document.getElementById("lyric_text").style.display = "grid"
     setStopMusic()
   }
 }
 
 const showHideFilter = () => {
   let state_filter = document.getElementById("state_filter").style.display;
-  
+  if(state_filter==""){
+    state_filter = "none"
+  }
   if (state_filter=="none") {
-    document.getElementById("state_filter").style.display = "flex"
+    document.getElementById("state_filter").style.display = "grid"
     setShowFilter()
   } else {
     document.getElementById("state_filter").style.display = "none"
@@ -193,8 +197,18 @@ const showHideFilter = () => {
   }
 }
 
-const showHidechat_window = () => {
-
+const showHideChat_window = () => {
+  let state_chat_window = document.getElementById("state_chat_window").style.display
+  if(state_filter==""){
+    state_filter = "flex"
+  }
+  if (state_chat_window=="none") {
+    document.getElementById("state_chat_window").style.display = "grid"
+    setChatRoomClose()
+  } else {
+    document.getElementById("state_chat_window").style.display = "none"
+    setChatRoomOpen()
+  }
 }
 
 const leave_room = () => {
@@ -239,7 +253,7 @@ const setPlayVideo = () => {
 }
 const setShowFilter = () => {
   const html = `
-    <i class="fas fa-filter"></i>
+    <i class="stop fas fa-filter"></i>
     <span>hide</span>
   `
   document.querySelector('.main__filter_button').innerHTML = html;
@@ -268,23 +282,21 @@ const setPlayMusic = () => {
   `
   document.querySelector('.main__music_button').innerHTML = html;
 }
-/*-----------------------------------------------------------------------*/
 
-/*下面沒有被使用--------------------------------------------------------------------*/
 const setChatRoomOpen = () => {
   const html = `
-    <i class="fas fa-video"></i>
+    <i class="stop fas fa-comment-alt"></i>
     <span>Chat</span>
   `
-  document.querySelector('.main__video_button').innerHTML = html;
+  document.querySelector('.main__chat_button').innerHTML = html;
 }
 
 const setChatRoomClose = () => {
   const html = `
-  <i class="stop fas fa-video-slash"></i>
+    <i class="fas fa-comment-alt"></i>
     <span>Chat</span>
   `
-  document.querySelector('.main__video_button').innerHTML = html;
+  document.querySelector('.main__chat_button').innerHTML = html;
 }
 
 /*-------------------------------------------------------濾鏡*/

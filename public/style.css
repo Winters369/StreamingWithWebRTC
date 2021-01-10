@@ -1,8 +1,8 @@
 .body{
     margin: 0%;
     padding: 0%;
-   /* width: auto;*/
-   /* height: auto;*/
+    width: auto;
+    height: auto;
     font: normal 100% Helvetica, Arial, sans-serif;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -16,35 +16,35 @@ input, textarea {
 
 .main {
     height: 100vh;
-    /*display: flex;*/
+    display:grid;
     background-size: cover;
+    background-color: #242324;
 }
 
 .main__left {
-    flex: 0.6;
-    display: flex;
+    display: grid;
     flex-direction: column;
-    /*float: left;*/
     flex-wrap: wrap;
     overflow: auto;
+    height: auto;
 }
 .main__right {
-    flex: 0.4;
+    height: auto;
     background-color: #1f1a1ac9;
     border-left: 1px solid #000000;
-    display: flex;
+    display:flex;
     flex-direction: column;
     object-fit: cover;
+    flex-grow: 1;
+    max-height: 25vw;
 }
 
 .main__videos {
-    flex-grow: 1;
     background-color: #242324;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 40pt;
-
     /*濾鏡-webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
    /* filter: grayscale(50%);*/
    
@@ -73,6 +73,13 @@ video {
                     from { filter: hue-rotate(0); }
                     to { filter: hue-rotate(360deg); }
                 }  RGB特效*/
+.main__lyric{
+    color: #ffffff;
+    text-align: center;
+    display: none;
+    overflow-y: auto;
+    max-height: 50vh;
+}
 
 .main__header {
     padding-top: 5px;
@@ -80,12 +87,13 @@ video {
     text-align: center;
 }
 .main__chat_window { 
-    flex-grow: 1;
+    display: flex;
     overflow-y: scroll; 
     background-color: #242324;
     border: 1px solid black;
     width:auto;
-    height:400px;
+    height: 100px;
+    flex-grow: 1;
     word-break: break-all;
 }
 .messages{
@@ -113,6 +121,7 @@ video {
     display: flex;
     justify-content: space-between;
     padding: 1%;
+    height: min-content;
 }
 .main__controls__block {
     display: flex;
@@ -137,9 +146,10 @@ video {
 
 .main__filter_panel{
     display: none;
+    color: #e6d3d2;
 }
 
-.leave_meeting {
+.leave_meeting{
     color: #EB534B;
 }
 .unmute, .stop {
@@ -152,6 +162,7 @@ video {
     justify-content: center;
     align-items: center;
     /*padding: 8px 10px;*/
+    color: #CC3B33;
     padding: auto;
     min-width: 30px;
     cursor: pointer;
