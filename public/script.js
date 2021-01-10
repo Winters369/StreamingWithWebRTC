@@ -158,7 +158,6 @@ const muteUnmute = () => {
 
 const playStop = () => {
   const video = document.getElementById('video')
-  //console.log('object')
   let enabled = myVideoStream.getVideoTracks()[0].enabled;
   if (enabled) {
     myVideoStream.getVideoTracks()[0].enabled = false;
@@ -168,7 +167,7 @@ const playStop = () => {
     myVideoStream.getVideoTracks()[0].enabled = true;
   }
 }
-/*------------------------------------播音樂*/
+
 const playStopMusic = () => {
   let state_music = document.getElementById("MovieShow").style.display;
   if (state_music=="none") {
@@ -182,7 +181,19 @@ const playStopMusic = () => {
   }
 }
 
-const chat_window = () => {
+const showHideFilter = () => {
+  let state_filter = document.getElementById("state_filter").style.display;
+  
+  if (state_filter=="none") {
+    document.getElementById("state_filter").style.display = "flex"
+    setShowFilter()
+  } else {
+    document.getElementById("state_filter").style.display = "none"
+    setHideFilter()
+  }
+}
+
+const showHidechat_window = () => {
 
 }
 
@@ -192,7 +203,9 @@ const leave_room = () => {
     window.location.assign("../")
   }
 }
-/*---------------------------------------麥克風*/
+//--------------//
+//  icon setup  //
+//--------------//
 const setMuteButton = () => {
   const html = `
     <i class="fas fa-microphone"></i>
@@ -208,7 +221,7 @@ const setUnmuteButton = () => {
   `
   document.querySelector('.main__mute_button').innerHTML = html;
 }
-/*-------------------------------------實況*/
+
 const setStopVideo = () => {
   const html = `
     <i class="fas fa-video"></i>
@@ -224,7 +237,22 @@ const setPlayVideo = () => {
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
-/*------------------------------------音樂*/
+const setShowFilter = () => {
+  const html = `
+    <i class="fas fa-filter"></i>
+    <span>hide</span>
+  `
+  document.querySelector('.main__filter_button').innerHTML = html;
+}
+
+const setHideFilter = () => {
+  const html = `
+    <i class="fas fa-filter"></i>
+    <span>show</span>
+  `
+  document.querySelector('.main__filter_button').innerHTML = html;
+}
+
 const setStopMusic = () => {
   const html = `
     <i class="fas fa-music"></i>
