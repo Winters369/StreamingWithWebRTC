@@ -169,23 +169,16 @@ const playStop = () => {
   }
 }
 /*------------------------------------播音樂*/
-function Control(x){
-  if(x=='start'){
-  　document.getElementById("MovieShow").play();
-    document.getElementById("MovieShow").style.display="none";
-  }else if(x=='stop'){
-  　document.getElementById("MovieShow").pause();
-    document.getElementById("MovieShow").style.display="";
-  }}
-/*-----------------------------------------------*/
 const playStopMusic = () => {
-  let enabled = myVideoStream.getMusicTracks()[0].enabled;
-  if (enabled) {
-    myVideoStream.getMusicTracks()[0].enabled = false;
+  let state_music = document.getElementById("MovieShow").style.display;
+  if (state_music=="none") {
+    document.getElementById("MovieShow").pause();
+    document.getElementById("MovieShow").style.display="";
     setPlayMusic()
   } else {
+    document.getElementById("MovieShow").play();
+    document.getElementById("MovieShow").style.display="none";
     setStopMusic()
-    myVideoStream.getMusicTracks()[0].enabled = true;
   }
 }
 
@@ -219,15 +212,15 @@ const setUnmuteButton = () => {
 const setStopVideo = () => {
   const html = `
     <i class="fas fa-video"></i>
-    <span>Stop Video</span>
+    <span>Stop</span>
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
 
 const setPlayVideo = () => {
   const html = `
-  <i class="stop fas fa-video-slash"></i>
-    <span>Play Video</span>
+    <i class="stop fas fa-video-slash"></i>
+    <span>Play</span>
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
@@ -235,15 +228,15 @@ const setPlayVideo = () => {
 const setStopMusic = () => {
   const html = `
     <i class="fas fa-music"></i>
-    <span>Stop Music</span>
+    <span>Pause</span>
   `
   document.querySelector('.main__music_button').innerHTML = html;
 }
 
 const setPlayMusic = () => {
   const html = `
-  <i class="stop fas fa-music-slash"></i>
-    <span>Play Music</span>
+    <i class="stop fas fa-music"></i>
+    <span>Play</span>
   `
   document.querySelector('.main__music_button').innerHTML = html;
 }
