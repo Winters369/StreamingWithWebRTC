@@ -177,6 +177,7 @@ const playStopMusic = () => {
     setPlayMusic()
   } else {
     document.getElementById("MovieShow").play();
+    document.getElementById("MovieShow").volume = 0.3;
     document.getElementById("MovieShow").style.display="none";
     document.getElementById("lyric_text").style.display = "grid"
     setStopMusic()
